@@ -35,7 +35,6 @@ form button {
 form textarea {
   width: 100%;
   max-width: 400px;
-  height: 100px;
   border-radius: 5px;
   border: none;
   padding: 5px 10px;
@@ -43,7 +42,6 @@ form textarea {
   font-weight: 500;
   color: #ff8600;
   margin-bottom: 20px;
-  resize: none;
   font-family: 'Montserrat', sans-serif;
 }
 

@@ -37,7 +37,7 @@ const recordsNotFound = () => {
   noRecords.classList.add('no-records');
   noRecords.innerHTML = `
     <h2> ¯&#92;_(ツ)_/¯</h2>
-    <p>You do not have any recipes yet.</p>
+    <p>Nemaš nijedan recept.</p>
   `;
   mainContainer.appendChild(noRecords);
 };
