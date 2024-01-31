@@ -4,33 +4,35 @@
     "version": "0.0.0",
     "private": true,
     "exports": {
-      ".": {
-        "import": "./dist/vite-vanilla-library.js",
-        "require": "./dist/vite-vanilla-library.cjs"
-      }
+        ".": {
+            "import": "./dist/vite-vanilla-library.js",
+            "require": "./dist/vite-vanilla-library.cjs"
+        }
     },
     "main": "./dist/vite-vanilla-library.cjs",
     "module": "./dist/vite-vanilla-library.js",
     "files": [
-      "dist"
+        "dist"
     ],
     "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "lint": "eslint . --fix",
-      "prepare": "husky install"
+        "build": "vite build",
+        "lint": "eslint . --fix",
+        "prepare": "husky install",
+        "prettier-watch": "npx onchange \"**/*\" -- prettier --write  --ignore-unknown {{changed}}",
+        "dev": "vite && prettier-watch && lint"
     },
     "devDependencies": {
-      "@antfu/eslint-config": "^2.6.3",
-      "@commitlint/cli": "^18.6.0",
-      "@commitlint/config-conventional": "^18.6.0",
-      "camelcase": "^8.0.0",
-      "changelogen": "^0.5.5",
-      "eslint": "^8.56.0",
-      "husky": "^9.0.7",
-      "lint-staged": "^15.2.1",
-      "vite": "^5.0.12",
-      "vite-plugin-dts": "^3.7.2",
-      "vitest": "^1.2.2"
+        "@antfu/eslint-config": "^2.6.3",
+        "@commitlint/cli": "^18.6.0",
+        "@commitlint/config-conventional": "^18.6.0",
+        "camelcase": "^8.0.0",
+        "changelogen": "^0.5.5",
+        "eslint": "^8.56.0",
+        "husky": "^9.0.7",
+        "lint-staged": "^15.2.1",
+        "prettier": "3.2.4",
+        "vite": "^5.0.12",
+        "vite-plugin-dts": "^3.7.2",
+        "vitest": "^1.2.2"
     }
-  }
+}

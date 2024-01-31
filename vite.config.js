@@ -1,11 +1,11 @@
 /// <reference types="vitest" />
-import { resolve } from 'node:path'
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
-import camelCase from 'camelcase'
-import packageJson from './package.json'
+import { resolve } from 'node:path';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import camelCase from 'camelcase';
+import packageJson from './package.json';
 
-const packageName = packageJson.name.split('/').pop() || packageJson.name
+const packageName = packageJson.name.split('/').pop() || packageJson.name;
 
 export default defineConfig({
   build: {
@@ -16,8 +16,6 @@ export default defineConfig({
       fileName: packageName,
     },
   },
-  plugins: [
-    dts({ rollupTypes: true }),
-  ],
+  plugins: [dts({ rollupTypes: true })],
   test: {},
-})
+});
