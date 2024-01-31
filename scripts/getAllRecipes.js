@@ -1,12 +1,46 @@
 import { getDocs, collection } from 'firebase/firestore';
 import { firestore } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase.js';
+
+const mainContainer = document.getElementById('main-container');
+let userId = null;
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userId = user.uid;
+    return;
+  } 
+
+  userId = null;
+});
+
 
 const recipesContainer = document.getElementById('recipes');
 const getAllRecipes = async (db) => {
   const recipes = await getDocs(collection(db, 'recipes'));
   const recipesList = recipes.docs.map((doc) => doc.data());
+  if (recipesList.length) {
+   return createRecipesContent(recipesList);
+  }
 
-  recipesList.forEach((recipe) => {
+  recordsNotFound();
+  
+};
+
+const recordsNotFound = () => {
+  const noRecords = document.createElement('div');
+  noRecords.classList.add('no-records');
+  noRecords.innerHTML = `
+    <h2> ¯&#92;_(ツ)_/¯</h2>
+    <p>You do not have any recipes yet.</p>
+  `;
+  mainContainer.appendChild(noRecords);
+}
+
+const createRecipesContent = (recipes) => {
+  recipes.forEach((recipe) => {
+    const recipeActionButtons = showActionButtons(recipe.userId);
     const recipeCard = document.createElement('div');
     recipeCard.classList.add('recipe');
     recipeCard.innerHTML = `
@@ -14,11 +48,28 @@ const getAllRecipes = async (db) => {
       <h2>${recipe.title}</h2>
       <p>${recipe.description}</p>
       <div class="tags">
-        <p>${recipe.category}</p>
+        <button>${recipe.category}</button>
       </div>
     `;
+    if (recipeActionButtons) {
+      recipeCard.innerHTML += recipeActionButtons;
+    }
+
     recipesContainer.appendChild(recipeCard);
   });
+}
+
+const showActionButtons = (id) => {
+ if (userId === id) {
+   return `
+     <div class="action-buttons justify-content-start">
+       <button style="margin-right: 5px">Edit</button>
+       <button>Delete</button>
+     </div>
+   `;
+ }
+
+ return null;
 };
 
 document.addEventListener('DOMContentLoaded', getAllRecipes(firestore));
