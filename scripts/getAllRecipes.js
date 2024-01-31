@@ -68,12 +68,12 @@ const createRecipesContent = (recipes) => {
   });
 }
 
+
 const showActionButtons = (id, recipeId) => {
  if (userId === id) {
    return `
      <div class="action-buttons justify-content-start">
-       <a style="margin-right: 10px" href="/edit.html?id=${recipeId}">Edit</a>
-       <button>Delete</button>
+      <a style="margin-right: 10px" href="/edit.html?id=${recipeId}">Izmijeni</a>
      </div>
    `;
  }

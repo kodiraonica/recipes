@@ -1,4 +1,4 @@
-import { getDoc, doc, updateDoc } from 'firebase/firestore';
+import { getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { firestore } from './firebase';
 
 const titleInput = document.getElementById('title');
@@ -6,10 +6,10 @@ const descriptionInput = document.getElementById('description');
 const categoryInput = document.getElementById('category');
 const imageInput = document.getElementById('image');
 const editRecipeForm = document.getElementById('edit-recipe-form');
-
+const deleteButton = document.getElementById('delete-recipe-button');
+const urlParams = new URLSearchParams(window.location.search);
+const recipeId = urlParams.get('id');
 const getRecipeById = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const recipeId = urlParams.get('id');
     if (!recipeId) {
       window.location.replace('/');
       return;
@@ -34,8 +34,7 @@ const populateRecipeContent = (recipe) => {
 
 const updateRecipe = async (e) => {
     e.preventDefault();
-    const urlParams = new URLSearchParams(window.location.search);
-    const recipeId = urlParams.get('id');
+    
     if (!recipeId) {
       window.location.replace('/');
       return;
@@ -57,5 +56,17 @@ const updateRecipe = async (e) => {
     window.location.href = `/recept.html?id=${recipeId}`;
 }
 
+const deleteRecipeById = async () => {
+  try {
+   await deleteDoc(doc(firestore, 'recipes', recipeId));
+    window.location.replace('/');
+  }
+  catch (err) {
+    console.log(err);
+  }
+};
+
+
+deleteButton.addEventListener('click', deleteRecipeById);
 editRecipeForm.addEventListener('submit', updateRecipe);
 window.addEventListener('DOMContentLoaded', getRecipeById);
