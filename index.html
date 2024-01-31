@@ -24,7 +24,9 @@
           <h1>Recepti</h1>
         </a>
         <input type="search" placeholder="Pretraži recepte" />
-        <a href="/login.html"><span class="material-symbols-outlined"> person </span></a>
+        <a href="/login.html"
+          ><span class="material-symbols-outlined"> person </span></a
+        >
       </nav>
 
       <main>
@@ -38,71 +40,7 @@
           <a href="./new.html" id="new-recipe-button">Novi recept</a>
         </div>
 
-        <div class="recipes">
-          <div class="recipe">
-            <h2>Torta od jagoda</h2>
-            <img
-              src="https://img.freepik.com/free-photo/zoom-view-little-round-cake-decorated-with-strawberries-white-plate_176474-120149.jpg"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magni
-              impedit vitae vero quisquam reiciendis sunt temporibus quia
-              placeat dignissimos.
-            </p>
-            <div class="tags">
-              <button>Desert</button>
-            </div>
-          </div>
-
-          <div class="recipe">
-            <h2>Tjestenina</h2>
-            <img
-              src="https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magni
-              impedit vitae vero quisquam reiciendis sunt temporibus quia
-              placeat dignissimos.
-            </p>
-            <div class="tags">
-              <button>Rucak</button>
-            </div>
-          </div>
-
-          <div class="recipe">
-            <h2>Bolognese</h2>
-            <img
-              src="https://img.freepik.com/free-photo/pasta-selective-dish-meal-restaurant_1172-271.jpg"
-              alt="papice"
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magni
-              impedit vitae vero quisquam reiciendis sunt temporibus quia
-              placeat dignissimos.
-            </p>
-            <div class="tags">
-              <button>Rucak</button>
-            </div>
-          </div>
-
-          <div class="recipe">
-            <h2>Salata</h2>
-            <img
-              src="https://img.freepik.com/premium-photo/hands-holding-dish-with-pan-fried-chicken-vegetables_200722-2111.jpg"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magni
-              impedit vitae vero quisquam reiciendis sunt temporibus quia
-              placeat dignissimos.
-            </p>
-            <div class="tags">
-              <button>Predjelo</button>
-            </div>
-          </div>
-        </div>
+        <div class="recipes" id="recipes"></div>
 
         <div class="recipes-pagination">
           <button>1</button>
@@ -119,6 +57,7 @@
       </footer>
     </div>
 
+    <script type="module" src="/scripts/getAllRecipes.js"></script>
     <script type="module" src="/scripts/guard.js"></script>
   </body>
 </html>
