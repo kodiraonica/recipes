@@ -1,4 +1,4 @@
-import { getDoc, collection, doc } from 'firebase/firestore';
+import { getDoc, doc } from 'firebase/firestore';
 import { firestore } from './firebase';
 
 const recipeRootElement = document.getElementById('recipe-root');

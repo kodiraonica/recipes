@@ -7,6 +7,7 @@ const createLogoutIcon = () => {
   logoutIcon.innerHTML = `logout`;
   logoutIcon.addEventListener('click', () => {
     auth.signOut();
+    window.location.reload();
   });
 };
 

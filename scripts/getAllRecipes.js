@@ -45,7 +45,7 @@ const recordsNotFound = () => {
 
 const createRecipesContent = (recipes) => {
   recipes.forEach((recipe) => {
-    const recipeActionButtons = showActionButtons(recipe.userId);
+    const recipeActionButtons = showActionButtons(recipe.userId, recipe.id);
     const recipeCard = document.createElement('div');
     recipeCard.addEventListener('click', () => {
       window.location.href = `/recept.html?id=${recipe.id}`;
@@ -68,11 +68,11 @@ const createRecipesContent = (recipes) => {
   });
 }
 
-const showActionButtons = (id) => {
+const showActionButtons = (id, recipeId) => {
  if (userId === id) {
    return `
      <div class="action-buttons justify-content-start">
-       <button style="margin-right: 5px">Edit</button>
+       <a style="margin-right: 10px" href="/edit.html?id=${recipeId}">Edit</a>
        <button>Delete</button>
      </div>
    `;
