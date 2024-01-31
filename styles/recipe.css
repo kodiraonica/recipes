@@ -35,7 +35,6 @@ button span {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     margin-right: 30px;
 }
 

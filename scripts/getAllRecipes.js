@@ -15,11 +15,16 @@ onAuthStateChanged(auth, (user) => {
   userId = null;
 });
 
-
 const recipesContainer = document.getElementById('recipes');
 const getAllRecipes = async (db) => {
   const recipes = await getDocs(collection(db, 'recipes'));
-  const recipesList = recipes.docs.map((doc) => doc.data());
+  const recipesList = recipes.docs.map((recipe) => {
+    return {
+      id: recipe.id,
+      ...recipe.data()
+    };
+  });
+ 
   if (recipesList.length) {
    return createRecipesContent(recipesList);
   }
@@ -42,11 +47,15 @@ const createRecipesContent = (recipes) => {
   recipes.forEach((recipe) => {
     const recipeActionButtons = showActionButtons(recipe.userId);
     const recipeCard = document.createElement('div');
+    recipeCard.addEventListener('click', () => {
+      window.location.href = `/recept.html?id=${recipe.id}`;
+    });
+    
     recipeCard.classList.add('recipe');
     recipeCard.innerHTML = `
       <img src="${recipe.image}" alt="${recipe.title}" />
       <h2>${recipe.title}</h2>
-      <p>${recipe.description}</p>
+      <p>${recipe.description.substring(0, 100)}</p>
       <div class="tags">
         <button>${recipe.category}</button>
       </div>

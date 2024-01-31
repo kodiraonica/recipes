@@ -5,3 +5,4 @@
 5. Tags
 6. 404 page
 7. log out
+8. validacije

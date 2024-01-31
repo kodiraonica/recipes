@@ -24,7 +24,9 @@
           <h1>Recepti</h1>
         </a>
         <input type="search" placeholder="Pretraži recepte" />
-        <a href="/login.html"><span class="material-symbols-outlined"> person </span></a>
+        <a href="/login.html"
+          ><span class="material-symbols-outlined"> person </span></a
+        >
       </nav>
 
       <main>
@@ -34,52 +36,7 @@
             <span>Podijeli</span>
           </button>
         </div>
-        <div class="cards-container">
-          <div class="card">
-            <img
-              src="https://img.freepik.com/free-photo/zoom-view-little-round-cake-decorated-with-strawberries-white-plate_176474-120149.jpg"
-              alt=""
-            />
-            <h2>Torta od jagoda</h2>
-          </div>
-
-          <div class="card">
-            <div class="recipe-description">
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Perferendis debitis harum officiis similique, reiciendis numquam
-                consequatur voluptates nihil quidem id, dolorem veniam!
-                Blanditiis eum placeat facilis tenetur odit laborum quae.
-              </p>
-            </div>
-
-            <div class="recipe-steps">
-              <h2>Postupak</h2>
-              <ol>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, voluptatum.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, voluptatum.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, voluptatum.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, voluptatum.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam, voluptatum.
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
+        <div class="cards-container" id="recipe-root"></div>
       </main>
 
       <footer>
@@ -90,5 +47,7 @@
         </h3>
       </footer>
     </div>
+
+    <script type="module" src="scripts/getCurrentRecipe.js"></script>
   </body>
 </html>
