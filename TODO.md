@@ -1,8 +1,6 @@
 1. Pagination
 2. Search 
-3. Flash messages
-4. UD recepata
-5. Tags
-6. 404 page
-7. log out
-8. validacije
+3. UD recepata
+4. Tags
+5. log out
+6. validacije
