@@ -10,6 +10,7 @@ const onLoginSubmit = (e) => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
         const user = userCredential.user;
+        window.location.href = '/new.html';
         console.log(user);
         })
         .catch((error) => {
@@ -26,6 +27,7 @@ const onCreateAccountSubmit = (e) => {
         .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        window.location.href = '/new.html';
         })
         .catch((error) => {
         const errorCode = error.code;
