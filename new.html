@@ -28,12 +28,12 @@
         <a href="/login.html"><span class="material-symbols-outlined"> person </span></a>
       </nav>
       <main>
-        <form class="align-items-start">
+        <form class="align-items-start" id="new-recipe-form">
           <h1>Novi recept</h1>
-          <input type="text" placeholder="Naziv recepta" />
-          <textarea placeholder="Postupak pripreme"></textarea>
-          <input type="text" placeholder="Kategorija" />
-          <input type="url" placeholder="Link na sliku" />
+          <input type="text" placeholder="Naziv recepta" id="title" />
+          <textarea placeholder="Postupak pripreme" id="description"></textarea>
+          <input type="text" placeholder="Kategorija" id="category" />
+          <input type="url" placeholder="Link na sliku" id="image" />
           <button>Objavi</button>
         </form>
       </main>
@@ -48,5 +48,6 @@
     </div>
 
     <script type="module" src="/scripts/guard.js"></script>
+    <script type="module" src="/scripts/createRecipe.js"></script>
   </body>
 </html>
