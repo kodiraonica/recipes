@@ -50,3 +50,9 @@ form textarea {
 textarea:focus, input:focus {
     outline: none;
 }
+
+form a {
+    color: #FF8600;
+    font-size: 14px;
+    font-weight: 500;
+}
