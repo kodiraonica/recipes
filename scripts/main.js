@@ -1,46 +1,48 @@
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from "./firebase.js";
-const signUpForm = document.getElementById("signup-form");
-const loginForm = document.getElementById("login-form");
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from './firebase.js';
+const signUpForm = document.getElementById('signup-form');
+const loginForm = document.getElementById('login-form');
 
 const onLoginSubmit = (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-        const user = userCredential.user;
-        window.location.href = '/index.html';
-        console.log(user);
-        })
-        .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      window.location.href = '/index.html';
+      console.log(user);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
     });
-}
+};
 const onCreateAccountSubmit = (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        window.location.href = '/index.html';
-        })
-        .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+      window.location.href = '/index.html';
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
     });
-}
-
+};
 
 if (signUpForm) {
-    signUpForm.addEventListener('submit', onCreateAccountSubmit);
+  signUpForm.addEventListener('submit', onCreateAccountSubmit);
 }
 
 if (loginForm) {
-    loginForm.addEventListener('submit', onLoginSubmit);    
+  loginForm.addEventListener('submit', onLoginSubmit);
 }

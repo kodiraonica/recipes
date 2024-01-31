@@ -10,7 +10,7 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     userId = user.uid;
     return;
-  } 
+  }
 
   userId = null;
 });
@@ -21,16 +21,15 @@ const getAllRecipes = async (db) => {
   const recipesList = recipes.docs.map((recipe) => {
     return {
       id: recipe.id,
-      ...recipe.data()
+      ...recipe.data(),
     };
   });
- 
+
   if (recipesList.length) {
-   return createRecipesContent(recipesList);
+    return createRecipesContent(recipesList);
   }
 
   recordsNotFound();
-  
 };
 
 const recordsNotFound = () => {
@@ -41,7 +40,7 @@ const recordsNotFound = () => {
     <p>You do not have any recipes yet.</p>
   `;
   mainContainer.appendChild(noRecords);
-}
+};
 
 const createRecipesContent = (recipes) => {
   recipes.forEach((recipe) => {
@@ -50,7 +49,7 @@ const createRecipesContent = (recipes) => {
     recipeCard.addEventListener('click', () => {
       window.location.href = `/recept.html?id=${recipe.id}`;
     });
-    
+
     recipeCard.classList.add('recipe');
     recipeCard.innerHTML = `
       <img src="${recipe.image}" alt="${recipe.title}" />
@@ -66,19 +65,18 @@ const createRecipesContent = (recipes) => {
 
     recipesContainer.appendChild(recipeCard);
   });
-}
-
+};
 
 const showActionButtons = (id, recipeId) => {
- if (userId === id) {
-   return `
+  if (userId === id) {
+    return `
      <div class="action-buttons justify-content-start">
       <a style="margin-right: 10px" href="/edit.html?id=${recipeId}">Izmijeni</a>
      </div>
    `;
- }
+  }
 
- return null;
+  return null;
 };
 
 document.addEventListener('DOMContentLoaded', getAllRecipes(firestore));

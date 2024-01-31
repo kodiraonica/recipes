@@ -1,11 +1,11 @@
 .align-self-center {
-    align-self: center;
+  align-self: center;
 }
 
 .align-items-start {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .justify-content-start {
-    justify-content: flex-start !important;
+  justify-content: flex-start !important;
 }
