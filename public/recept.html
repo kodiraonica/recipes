@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/recipe.css" />
+    <title>Recepti | Pojedinačan recept</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <a href="/index.html">
+          <h1>Recepti</h1>
+        </a>
+        <form id="search-recipes-form">
+          <input type="search" placeholder="Pretraži recepte" id="search-input" />
+        </form>
+        <span id="action-icon"></span>
+      </nav>
+
+      <main>
+        <div class="user-action-buttons">
+          <button class="btn btn-secondary">
+            <span class="material-symbols-outlined"> share </span>
+            <span>Podijeli</span>
+          </button>
+        </div>
+        <div class="cards-container" id="recipe-root">
+          <div id="loader">Loading...</div>
+        </div>
+      </main>
+
+      <footer>
+        <span class="material-symbols-outlined"> copyright </span>
+
+        <h3>
+          <a href="https://kodiraonica.dev/" target="_blank">Kodiraonica</a>
+        </h3>
+      </footer>
+    </div>
+
+    <script type="module" src="/scripts/headerIcons.js"></script>
+    <script type="module" src="scripts/getCurrentRecipe.js"></script>
+  </body>
+</html>

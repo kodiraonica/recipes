@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/inputs.css" />
+    <link rel="stylesheet" href="styles/utils.css" />
+    <title>Recepti | Izmjena</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <a href="/index.html">
+          <h1>Recepti</h1>
+        </a>
+        <form id="search-recipes-form">
+          <input type="search" placeholder="Pretraži recepte" id="search-input" />
+        </form>
+        <span id="action-icon"></span>
+      </nav>
+      <main>
+        <form class="align-items-start" id="edit-recipe-form">
+          <h1>Izmijeni recept</h1>
+          <input type="text" placeholder="Naziv recepta" id="title" />
+          <textarea placeholder="Postupak pripreme" id="description"></textarea>
+          <input type="text" placeholder="Kategorija" id="category" />
+          <input type="url" placeholder="Link na sliku" id="image" />
+          <button>Izmijeni</button>
+        </form>
+
+        <button id="delete-recipe-button">Obriši</button>
+      </main>
+
+      <footer>
+        <span class="material-symbols-outlined"> copyright </span>
+
+        <h3>
+          <a href="https://kodiraonica.dev/" target="_blank">Kodiraonica</a>
+        </h3>
+      </footer>
+    </div>
+
+    <script type="module" src="/scripts/headerIcons.js"></script>
+    <script type="module" src="/scripts/guard.js"></script>
+    <script type="module" src="/scripts/editRecipe.js"></script>
+    <script type="module" src="/scripts/search.js"></script>
+  </body>
+</html>
