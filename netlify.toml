@@ -1,4 +1,0 @@
-[[redirects]]
-from = "/npmjs/*"
-to = "/npmjs/"
-status = 200
