@@ -1,21 +1,16 @@
 /// <reference types="vitest" />
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
-import camelCase from 'camelcase';
-import packageJson from './package.json';
+import path from 'node:path';
 
-const packageName = packageJson.name.split('/').pop() || packageJson.name;
+import { defineConfig } from 'vite';
+import { partytownVite } from '@builder.io/partytown/utils';
 
 export default defineConfig({
   build: {
-    lib: {
-      entry: resolve(__dirname, 'scripts/main.js'),
-      formats: ['es', 'cjs', 'umd', 'iife'],
-      name: camelCase(packageName, { pascalCase: true }),
-      fileName: packageName,
-    },
   },
-  plugins: [dts({ rollupTypes: true })],
+  plugins: [
+    partytownVite({
+      dest: path.join(__dirname, 'dist')
+    })
+  ],
   test: {},
 });
