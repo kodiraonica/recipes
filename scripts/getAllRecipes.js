@@ -25,6 +25,27 @@ const getAllRecipes = async (db) => {
     };
   });
 
+  if (recipesList.length > 6) {
+    const { start, end, page } = initializePagination();
+
+    if (recipesList.length < end) {
+      const pagination = document.getElementById('recipes-pagination');
+      pagination.innerHTML = `
+        <a href="/?page=${page - 1}">Prethodna</a>
+      `;
+    }
+
+    if (page === 1) {
+      const pagination = document.getElementById('recipes-pagination');
+      pagination.innerHTML = `
+        <a href="/?page=${page + 1}">Sljedeća</a>
+      `;
+    }
+    return createRecipesContent(recipesList.slice(start, end));
+  }
+
+  
+
   if (recipesList.length) {
     return createRecipesContent(recipesList);
   }
@@ -79,4 +100,24 @@ const showActionButtons = (id, recipeId) => {
   return null;
 };
 
-document.addEventListener('DOMContentLoaded', getAllRecipes(firestore));
+const initializePagination = () => {
+  const pagination = document.getElementById('recipes-pagination');
+  const page = +new URLSearchParams(window.location.search).get('page') || 1;
+  const limit = 6;
+  const start = (page - 1) * limit;
+  const end = page * limit;
+
+  pagination.innerHTML = `
+    <a href="/?page=${page - 1}">Prethodna</a>
+    <a href="/?page=${page + 1}">Sljedeća</a>
+  `;
+
+  return { start, end, page };
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const { start, end } = initializePagination();
+  getAllRecipes(firestore, start, end);
+});
