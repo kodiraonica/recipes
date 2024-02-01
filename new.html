@@ -13,8 +13,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link rel="stylesheet" href="styles/layout.css" />
     <link rel="stylesheet" href="styles/inputs.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+
     <link rel="stylesheet" href="styles/utils.css" />
     <title>Recepti | Novi recept</title>
   </head>
@@ -24,7 +25,9 @@
         <a href="/index.html">
           <h1>Recepti</h1>
         </a>
-        <input type="search" placeholder="Pretraži recepte" />
+        <form id="search-recipes-form">
+          <input type="search" placeholder="Pretraži recepte" id="search-input" />
+        </form>
         <span id="action-icon"></span>
       </nav>
       <main>
