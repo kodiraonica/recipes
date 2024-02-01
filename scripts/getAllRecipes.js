@@ -44,8 +44,6 @@ const getAllRecipes = async (db) => {
     return createRecipesContent(recipesList.slice(start, end));
   }
 
-  
-
   if (recipesList.length) {
     return createRecipesContent(recipesList);
   }
@@ -118,6 +116,5 @@ const initializePagination = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const { start, end } = initializePagination();
-  getAllRecipes(firestore, start, end);
+  getAllRecipes(firestore);
 });
