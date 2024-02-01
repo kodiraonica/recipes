@@ -4,6 +4,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase.js';
 
 const mainContainer = document.getElementById('main-container');
+const loader = document.getElementById('loader');
+
 let userId = null;
 
 onAuthStateChanged(auth, (user) => {
@@ -17,38 +19,43 @@ onAuthStateChanged(auth, (user) => {
 
 const recipesContainer = document.getElementById('recipes');
 const getAllRecipes = async (db) => {
-  const recipes = await getDocs(collection(db, 'recipes'));
-  const recipesList = recipes.docs.map((recipe) => {
-    return {
-      id: recipe.id,
-      ...recipe.data(),
-    };
-  });
+  getDocs(collection(db, 'recipes')).then((recipes) => {
+    loader.remove();
 
-  if (recipesList.length > 6) {
-    const { start, end, page } = initializePagination();
+    const recipesList = recipes.docs.map((recipe) => {
+      return {
+        id: recipe.id,
+        ...recipe.data(),
+      };
+    });
 
-    if (recipesList.length < end) {
-      const pagination = document.getElementById('recipes-pagination');
-      pagination.innerHTML = `
+    if (recipesList.length > 6) {
+      const { start, end, page } = initializePagination();
+
+      if (recipesList.length < end) {
+        const pagination = document.getElementById('recipes-pagination');
+        pagination.innerHTML = `
         <a href="/?page=${page - 1}">Prethodna</a>
       `;
-    }
+      }
 
-    if (page === 1) {
-      const pagination = document.getElementById('recipes-pagination');
-      pagination.innerHTML = `
+      if (page === 1) {
+        const pagination = document.getElementById('recipes-pagination');
+        pagination.innerHTML = `
         <a href="/?page=${page + 1}">Sljedeća</a>
       `;
+      }
+      return createRecipesContent(recipesList.slice(start, end));
     }
-    return createRecipesContent(recipesList.slice(start, end));
-  }
 
-  if (recipesList.length) {
-    return createRecipesContent(recipesList);
-  }
+    if (recipesList.length) {
+      return createRecipesContent(recipesList);
+    }
 
-  recordsNotFound();
+    recordsNotFound();
+  }).catch((error) => {
+    console.log('Error getting documents: ', error);
+  })
 };
 
 const recordsNotFound = () => {
@@ -111,9 +118,7 @@ const initializePagination = () => {
   `;
 
   return { start, end, page };
-}
-
-
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   getAllRecipes(firestore);

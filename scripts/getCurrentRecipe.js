@@ -2,6 +2,7 @@ import { getDoc, doc } from 'firebase/firestore';
 import { firestore } from './firebase';
 
 const recipeRootElement = document.getElementById('recipe-root');
+const loader = document.getElementById('loader');
 
 const createRecipeImage = (recipeData) => {
   const recipeElement = document.createElement('div');
@@ -11,7 +12,8 @@ const createRecipeImage = (recipeData) => {
     src=${recipeData.image}
     alt=${recipeData.title}
     />
-    <h2>${recipeData.title}</h2>`;
+    <h2>${recipeData.title}</h2>
+  `;
 
   return recipeElement;
 };
@@ -29,13 +31,13 @@ const createRecipeDescription = (recipeData) => {
 };
 
 const createRecipeContent = (recipe) => {
-    const recipeData = recipe.data();
-    const recipeImage = createRecipeImage(recipeData);
-    const recipeDescriptionElement = createRecipeDescription(recipeData);
+  const recipeData = recipe.data();
+  const recipeImage = createRecipeImage(recipeData);
+  const recipeDescriptionElement = createRecipeDescription(recipeData);
 
-    recipeRootElement.appendChild(recipeImage);
-    recipeRootElement.appendChild(recipeDescriptionElement);
-}
+  recipeRootElement.appendChild(recipeImage);
+  recipeRootElement.appendChild(recipeDescriptionElement);
+};
 
 const getRecipeById = async () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -46,13 +48,18 @@ const getRecipeById = async () => {
   }
 
   const recipeRef = doc(firestore, 'recipes', recipeId);
-  const recipe = await getDoc(recipeRef);
+  getDoc(recipeRef)
+    .then((recipe) => {
+      loader.remove();
+      if (!recipe.exists()) {
+        return;
+      }
 
-  if (!recipe.exists()) {
-    return;
-  }
-
-  createRecipeContent(recipe);
+      createRecipeContent(recipe);
+    })
+    .catch((error) => {
+      console.log('Error getting document:', error);
+    });
 };
 
 window.addEventListener('DOMContentLoaded', getRecipeById);
