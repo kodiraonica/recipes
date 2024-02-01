@@ -18,44 +18,83 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const recipesContainer = document.getElementById('recipes');
-const getAllRecipes = async (db) => {
-  getDocs(collection(db, 'recipes')).then((recipes) => {
-    loader.remove();
+export const getAllRecipes = async (db) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchValue = urlParams.get('search');
+  const getDocsRecipes = getDocs(collection(db, 'recipes'))
+    .then((recipes) => {
+      let recipesList = [];
+      loader.remove();
 
-    const recipesList = recipes.docs.map((recipe) => {
-      return {
-        id: recipe.id,
-        ...recipe.data(),
-      };
+      if (searchValue) {
+        recipes.docs.map((recipe) => {
+          const recipeData = recipe.data();
+          const recipeTitle = recipeData.title.toLowerCase();
+          const recipeDescription = recipeData.description.toLowerCase();
+          const recipeCategory = recipeData.category.toLowerCase();
+
+          if (
+            recipeTitle.includes(searchValue) ||
+            recipeDescription.includes(searchValue) ||
+            recipeCategory.includes(searchValue)
+          ) {
+            return recipesList.push({
+              id: recipe.id,
+              ...recipe.data(),
+            });
+          }
+        });
+
+        createRecipePaginationAndContent(recipesList);
+        return recipesList;
+      }
+
+      recipes.docs.map((recipe) => {
+        return recipesList.push({
+          id: recipe.id,
+          ...recipe.data(),
+        });
+      });
+
+      createRecipePaginationAndContent(recipesList);
+
+      return recipesList;
+    })
+    .catch((error) => {
+      const recipesList = [];
+      console.log('Error getting documents: ', error);
+      return recipesList;
     });
 
-    if (recipesList.length > 6) {
-      const { start, end, page } = initializePagination();
+  const recipesList = await getDocsRecipes;
+  return recipesList;
+};
 
-      if (recipesList.length < end) {
-        const pagination = document.getElementById('recipes-pagination');
-        pagination.innerHTML = `
-        <a href="/?page=${page - 1}">Prethodna</a>
-      `;
-      }
+export const createRecipePaginationAndContent = (recipesList) => {
+  if (recipesList.length > 6) {
+    const { start, end, page } = initializePagination();
 
-      if (page === 1) {
-        const pagination = document.getElementById('recipes-pagination');
-        pagination.innerHTML = `
-        <a href="/?page=${page + 1}">Sljedeća</a>
-      `;
-      }
-      return createRecipesContent(recipesList.slice(start, end));
+    if (recipesList.length < end) {
+      const pagination = document.getElementById('recipes-pagination');
+      pagination.innerHTML = `
+      <a href="/?page=${page - 1}">Prethodna</a>
+    `;
     }
 
-    if (recipesList.length) {
-      return createRecipesContent(recipesList);
+    if (page === 1) {
+      const pagination = document.getElementById('recipes-pagination');
+      pagination.innerHTML = `
+      <a href="/?page=${page + 1}">Sljedeća</a>
+    `;
     }
+    return createRecipesContent(recipesList.slice(start, end));
+  }
 
-    recordsNotFound();
-  }).catch((error) => {
-    console.log('Error getting documents: ', error);
-  })
+  if (recipesList.length) {
+    return createRecipesContent(recipesList);
+  }
+
+  recordsNotFound();
 };
 
 const recordsNotFound = () => {
@@ -63,12 +102,15 @@ const recordsNotFound = () => {
   noRecords.classList.add('no-records');
   noRecords.innerHTML = `
     <h2> ¯&#92;_(ツ)_/¯</h2>
-    <p>Nemaš nijedan recept.</p>
+    <p>Nema ničega.</p>
   `;
   mainContainer.appendChild(noRecords);
 };
 
 const createRecipesContent = (recipes) => {
+  const previousRecipes = document.querySelectorAll('.recipe');
+  previousRecipes.forEach((recipe) => recipe.remove());
+
   recipes.forEach((recipe) => {
     const recipeActionButtons = showActionButtons(recipe.userId, recipe.id);
     const recipeCard = document.createElement('div');
