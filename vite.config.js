@@ -2,13 +2,12 @@
 import path from 'node:path';
 
 import { defineConfig } from 'vite';
-import { partytownVite } from '@builder.io/partytown/utils';
+import fg from 'fast-glob';
 
 export default defineConfig({
-  plugins: [
-    partytownVite({
-      entry: path.join(__dirname, 'src/index.html'),
-      dest: path.join(__dirname, 'dist')
-    })
-  ],
+  build: {
+    rollupOptions: {
+      input: fg.sync('./*.html', {absolute: true})
+    }
+  },
 });
