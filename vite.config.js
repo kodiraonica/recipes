@@ -1,5 +1,4 @@
 /// <reference types="vitest" />
-import path from 'node:path';
 
 import { defineConfig } from 'vite';
 import fg from 'fast-glob';
